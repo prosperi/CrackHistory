@@ -1,25 +1,19 @@
-<ion-modal-view>
-  <ion-header-bar>
-    <h1 class="title">Login</h1>
-    <div class="buttons">
-      <button class="button button-clear" ng-click="closeLogin()">Close</button>
-    </div>
-  </ion-header-bar>
+<ion-view view-title="ავტორიზაცია" class="bar-positive">
   <ion-content>
-    <form ng-submit="doLogin()">
-      <div class="list">
-        <label class="item item-input">
-          <span class="input-label">Username</span>
-          <input type="text" ng-model="loginData.username">
-        </label>
-        <label class="item item-input">
-          <span class="input-label">Password</span>
-          <input type="password" ng-model="loginData.password">
-        </label>
-        <label class="item">
-          <button class="button button-block button-positive" type="submit">Log in</button>
-        </label>
-      </div>
-    </form>
+    <div class="list list-inset">
+      <label class="item item-input">
+        <input type="text" placeholder="მომხმარებელი">
+      </label>
+      <label class="item item-input">
+        <input type="text" placeholder="პაროლი">
+      </label>
+      <button class="button button-block">შესვლა</button>
+      <p style="padding:11px; opacity:0.31;" align="center">ან</p>
+      <button class="button button-block">Facebook-ით ავტორიზაცია</button>
+      <br/>
+      <center>
+        <a href="" style="font-weight:bold;">არ გაქვთ ანგარიში?</a>
+      </center>
+    </div>
   </ion-content>
-</ion-modal-view>
+</ion-view>
