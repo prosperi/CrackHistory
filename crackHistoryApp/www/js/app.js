@@ -25,7 +25,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
 .config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
 
-    .state('app', {
+  .state('app', {
     url: '/app',
     abstract: true,
     templateUrl: 'templates/menu.html',
@@ -37,6 +37,15 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     views: {
       'menuContent': {
         templateUrl: 'templates/login.html'
+      }
+    }
+  })
+
+  .state('app.register', {
+    url: '/register',
+    views:{
+      'menuContent':{
+        templateUrl: 'templates/register.html'
       }
     }
   });
