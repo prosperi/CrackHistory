@@ -13,22 +13,35 @@
   </ion-side-menu-content>
 
   <ion-side-menu side="left">
-    <ion-header-bar class="bar-stable">
-      <h1 class="title">Left</h1>
-    </ion-header-bar>
     <ion-content>
       <ion-list>
-        <ion-item menu-close ng-click="login()">
-          Login
+        <ion-item menu-close class="item-positive item-avatar">
+          <img src="img/gravatar.png">
+          <h2 style="color:#FFF; font-weight:bold;">ზურა <br/> მესტიაშვილი</h2>
         </ion-item>
-        <ion-item menu-close href="#/app/search">
-          Search
+        <ion-item menu-close href="#/app/search" class="item item-icon-left">
+          <i class="icon ion-person"></i>
+          ჩემი ანგარიში
         </ion-item>
-        <ion-item menu-close href="#/app/browse">
-          Browse
+        <ion-item menu-close href="" class="item item-icon-left">
+          <i class="icon ion-android-list"></i>
+          გამოცდის საკითხები
         </ion-item>
-        <ion-item menu-close href="#/app/playlists">
-          Playlists
+        <ion-item menu-close href="" class="item item-icon-left">
+          <i class="icon ion-ios-timer"></i>
+          გამოცდის რეჟიმი
+        </ion-item>
+        <ion-item menu-close href="" class="item item-icon-left">
+          <i class="icon ion-stats-bars"></i>
+          ჩემი პროგრესი
+        </ion-item>
+        <ion-item menu-close href="" class="item item-icon-left">
+          <i class="icon ion-ios-information"></i>
+          აპლიკაციის შესახებ
+        </ion-item>
+        <ion-item menu-close href="" class="item item-icon-left">
+          <i class="icon ion-log-out"></i>
+          გამოსვლა
         </ion-item>
       </ion-list>
     </ion-content>
