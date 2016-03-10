@@ -5,7 +5,8 @@
       <i class="icon ion-ios-help-outline"></i>
     </div>
     <ion-list>
-      <ion-radio ng-repeat="answer in question.answers track by $index" ng-model="choice" ng-value="'A'" ng-click="show()">
+      <ion-radio ng-repeat="answer in question.answers track by $index" ng-model="$parent.$parent.choice"
+                 ng-value="answer.id" ng-change="show()" ng-disabled="turn">
         {{answer.body}}
       </ion-radio>
     </ion-list>
