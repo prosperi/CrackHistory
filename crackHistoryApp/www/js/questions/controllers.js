@@ -1,19 +1,22 @@
-angular.module('questions', [])
+angular.module('questions', ['questionsSrv'])
 
-.controller('categoriesCtrl', ['$scope', '$http', function($scope,$http){
+.controller('categoriesCtrl', ['$scope', 'categoriesSrv', function($scope, categoriesSrv){
 
-  $http({
-    method: "GET",
-    url: "https://notgiorgi.com/api/category/"
-  }).then(function(response){
-    $scope.categories = response.data;
-    console.log($scope.categories);
+  categoriesSrv.categoryList().then(function(response){
+    $scope.$parent.categories = [];
+    for(key in response.data){
+      $scope.$parent.categories.unshift(response.data[key]);
+    }
   }, function(response){
     console.log("Fetching categories failed");
   });
 
+
 }])
 
-.controller('questionsCtrl', ['$scope', function($scope){
+.controller('questionsCtrl', ['$scope', '$stateParams', 'categoriesSrv', function($scope, $stateParams, categoriesSrv){
+
+  $scope.category = $scope.$parent.categories[$stateParams.id];
+  console.log($scope.category);
 
 }])

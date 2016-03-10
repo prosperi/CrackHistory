@@ -48,8 +48,18 @@ angular.module('app', ['ionic', 'questions'])
     url: '/categories',
     views:{
       'menuContent':{
-        templateUrl: 'templates/test.html',
+        templateUrl: 'templates/categories.html',
         controller: 'categoriesCtrl'
+      }
+    }
+  })
+
+  .state('app.category', {
+    url: '/categories/:id',
+    views:{
+      'menuContent':{
+        templateUrl: 'templates/questions.html',
+        controller: 'questionsCtrl'
       }
     }
   });
