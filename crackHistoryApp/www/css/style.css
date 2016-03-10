@@ -2,3 +2,7 @@
 a{
   text-decoration: none;
 }
+
+.item-radio .item-content{
+  white-space:normal !important;
+}

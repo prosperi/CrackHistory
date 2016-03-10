@@ -2,21 +2,22 @@ angular.module('questions', ['questionsSrv'])
 
 .controller('categoriesCtrl', ['$scope', 'categoriesSrv', function($scope, categoriesSrv){
 
-  categoriesSrv.categoryList().then(function(response){
-    $scope.$parent.categories = [];
-    for(key in response.data){
-      $scope.$parent.categories.unshift(response.data[key]);
-    }
-  }, function(response){
-    console.log("Fetching categories failed");
-  });
-
+  $scope.categories = JSON.parse(window.localStorage.getItem("categoryList"));
 
 }])
 
-.controller('questionsCtrl', ['$scope', '$stateParams', 'categoriesSrv', function($scope, $stateParams, categoriesSrv){
+.controller('questionsCtrl', ['$scope', '$stateParams', '$ionicLoading', function($scope, $stateParams,$ionicLoading){
 
-  $scope.category = $scope.$parent.categories[$stateParams.id];
-  console.log($scope.category);
+  $scope.category = JSON.parse(window.localStorage.getItem("categoryList"))[$stateParams.id];
+  var questions = JSON.parse(window.localStorage.getItem("questionList"));
+
+  $scope.question = questions[0];
+
+  $scope.show = function(){
+    $ionicLoading.show({
+        template: '<ion-spinner icon="ripple" class="spinner-positive"></ion-spinner>',
+        duration: 500
+      });
+  };
 
 }])

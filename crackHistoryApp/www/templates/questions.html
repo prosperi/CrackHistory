@@ -1,5 +1,13 @@
-<ion-view view-title="კატეგორია" class="bar-positive">
-  <ion-content scroll="false">
-
+<ion-view view-title="{{category.name}}" class="bar-positive">
+  <ion-content scroll="false" padding="1">
+    <div class="item item-divider item-icon-right item-positive" style="white-space:normal;">
+      რომელ წელს ილაშქრა დავით აღმაშენებელმა?
+      <i class="icon ion-ios-help-outline"></i>
+    </div>
+    <ion-list>
+      <ion-radio ng-repeat="answer in question.answers track by $index" ng-model="choice" ng-value="'A'" ng-click="show()">
+        {{answer.body}}
+      </ion-radio>
+    </ion-list>
   </ion-content>
 </ion-view>
