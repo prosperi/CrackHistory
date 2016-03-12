@@ -55,11 +55,21 @@ angular.module('app', ['ionic', 'questions'])
   })
 
   .state('app.category', {
-    url: '/categories/:id',
+    url: '/categories/:id/:question',
     views:{
       'menuContent':{
         templateUrl: 'templates/questions.html',
         controller: 'questionsCtrl'
+      }
+    }
+  })
+
+  .state('app.finished', {
+    url: '/finished',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/finished.html',
+        controller: 'finishedCtrl'
       }
     }
   });

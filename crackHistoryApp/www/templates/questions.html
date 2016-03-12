@@ -1,14 +1,19 @@
 <ion-view view-title="{{category.name}}" class="bar-positive">
   <ion-content scroll="false" padding="1">
+
     <div class="item item-divider item-icon-right item-positive" style="white-space:normal;">
       რომელ წელს ილაშქრა დავით აღმაშენებელმა?
       <i class="icon ion-ios-help-outline"></i>
     </div>
     <ion-list>
       <ion-radio ng-repeat="answer in question.answers track by $index" ng-model="$parent.$parent.choice"
-                 ng-value="answer.id" ng-change="show()" ng-disabled="turn">
+                 ng-value="answer.index" ng-click="show($event)" ng-disabled="turn">
         {{answer.body}}
       </ion-radio>
     </ion-list>
+    <button class="button button-block" ng-disabled="!turn" ng-click="next()">
+      შემდეგი შეკითხვა
+    </button>
+
   </ion-content>
 </ion-view>
