@@ -4,6 +4,7 @@
       <li class="item item-icon-right" ng-repeat="category in categories track by $index"
           style="font-size:11pt;" ui-sref="app.category({ id: $index, question: 0 })">
         {{category.name}}
+        <span class="badge badge-positive" style="margin-right:11px;">{{category.count}}</span>
         <i class="icon ion-arrow-right-c"></i>
       </li>
     </ul>
