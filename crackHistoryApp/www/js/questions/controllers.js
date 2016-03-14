@@ -1,15 +1,15 @@
 angular.module('questions', ['questionsSrv'])
 
-.controller('categoriesCtrl', ['$scope', 'categoriesSrv', function($scope, categoriesSrv){
+.controller('categoriesCtrl', ['$scope', 'categoriesSrv', '$localStorage', function($scope, categoriesSrv, $localStorage){
 
-  $scope.categories = JSON.parse(window.localStorage.getItem("categoryList"));
+  $scope.categories = $localStorage.categoryList;
 
 }])
 
-.controller('questionsCtrl', ['$scope', '$stateParams', '$ionicLoading', '$timeout', '$state', '$ionicPopup', function($scope, $stateParams, $ionicLoading, $timeout, $state, $ionicPopup){
+.controller('questionsCtrl', ['$scope', '$stateParams', '$ionicLoading', '$timeout', '$state', '$ionicPopup', '$localStorage', function($scope, $stateParams, $ionicLoading, $timeout, $state, $ionicPopup, $localStorage){
 
-  $scope.category = JSON.parse(window.localStorage.getItem("categoryList"))[$stateParams.id];
-  var questions = JSON.parse(window.localStorage.getItem("questionList"));
+  $scope.category = $localStorage.categoryList[$stateParams.id];
+  var questions = $localStorage.questionList;
 
   $scope.currentCategory = $stateParams.id;
   $scope.currentQuestion = $stateParams.question;
@@ -57,7 +57,7 @@ angular.module('questions', ['questionsSrv'])
       if($scope.category.count > $scope.currentQuestion){
         $state.go('app.category', { id: $scope.currentCategory, question: $scope.currentQuestion});
       }else{
-        $state.go('app.finished');
+        $state.go('app.dashboard');
       }
       $ionicLoading.hide();
     }, 500);
@@ -74,44 +74,3 @@ angular.module('questions', ['questionsSrv'])
 
 
 }])
-
-.controller('finishedCtrl', function(){
-
-  var data = [
-    {
-        value: 300,
-        color:"#F7464A",
-        highlight: "#FF5A5E",
-        label: "Red"
-    },
-    {
-        value: 50,
-        color: "#46BFBD",
-        highlight: "#5AD3D1",
-        label: "Green"
-    },
-    {
-        value: 100,
-        color: "#FDB45C",
-        highlight: "#FFC870",
-        label: "Yellow"
-    },
-    {
-        value: 40,
-        color: "#949FB1",
-        highlight: "#A8B3C5",
-        label: "Grey"
-    },
-    {
-        value: 120,
-        color: "#4D5360",
-        highlight: "#616774",
-        label: "Dark Grey"
-    }
-
-  ];
-
-  var ctx = document.getElementById("myChart").getContext("2d");
-  var myNewChart = new Chart(ctx).PolarArea(data);
-
-})

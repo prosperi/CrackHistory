@@ -1,6 +1,6 @@
-angular.module('questionsSrv', [])
+angular.module('questionsSrv', ['ngStorage'])
 
-.factory('categoriesSrv', ['$http', function($http){
+.factory('categoriesSrv', ['$http', '$localStorage', function($http, $localStorage){
 
   var categories = {};
 
@@ -12,7 +12,8 @@ angular.module('questionsSrv', [])
     for(key in response.data){
       categories.categoryList.unshift(response.data[key]);
     }
-    window.localStorage.setItem("categoryList", JSON.stringify(categories.categoryList));
+    //window.localStorage.setItem("categoryList", JSON.stringify(categories.categoryList));
+    $localStorage.categoryList = categories.categoryList;
   }, function(response){
     console.log("Fetching categories failed");
   });
@@ -25,7 +26,8 @@ angular.module('questionsSrv', [])
     for(key in response.data){
       categories.questionList.unshift(response.data[key]);
     }
-    window.localStorage.setItem("questionList", JSON.stringify(categories.questionList));
+    //window.localStorage.setItem("questionList", JSON.stringify(categories.questionList));
+    $localStorage.questionList = categories.questionList;
   }, function(response){
     console.log("Fetching categories failed");
   });

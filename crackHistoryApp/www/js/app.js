@@ -1,4 +1,4 @@
-angular.module('app', ['ionic', 'questions'])
+angular.module('app', ['ionic', 'questions', 'dashboard'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -64,12 +64,12 @@ angular.module('app', ['ionic', 'questions'])
     }
   })
 
-  .state('app.finished', {
-    url: '/finished',
+  .state('app.dashboard', {
+    url: '/dashboard',
     views: {
       'menuContent': {
-        templateUrl: 'templates/finished.html',
-        controller: 'finishedCtrl'
+        templateUrl: 'templates/dashboard.html',
+        controller: 'dashboardCtrl'
       }
     }
   });
