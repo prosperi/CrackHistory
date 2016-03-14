@@ -6,3 +6,11 @@ a{
 .item-radio .item-content{
   white-space:normal !important;
 }
+
+.chart-legend li span{
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    margin-right: 5px;
+    border-radius: 3px;
+}
