@@ -55,7 +55,7 @@ angular.module('app', ['ionic', 'questions', 'dashboard'])
   })
 
   .state('app.category', {
-    url: '/categories/:id/:question',
+    url: '/categories/:id',
     views:{
       'menuContent':{
         templateUrl: 'templates/questions.html',

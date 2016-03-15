@@ -14,3 +14,14 @@ a{
     margin-right: 5px;
     border-radius: 3px;
 }
+
+.checked-radio-icon {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 3;
+    visibility: visible;
+    padding: 14px;
+    height: 100%;
+    font-size: 24px;
+}
