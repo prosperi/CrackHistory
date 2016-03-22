@@ -9,7 +9,9 @@ angular.module('questions', ['questionsSrv'])
 .controller('questionsCtrl', ['$scope', '$stateParams', '$ionicLoading', '$timeout', '$state', '$ionicPopup', '$localStorage', function($scope, $stateParams, $ionicLoading, $timeout, $state, $ionicPopup, $localStorage){
   console.log("hi");
   $scope.category = $localStorage.categoryList[$stateParams.id];
-  var questions = $localStorage.questionList;
+  var questions = $localStorage.questionList.filter(function(value){
+    return value.category_id == (parseInt($stateParams.id) + 1);
+  });
 
   $scope.currentCategory = $stateParams.id;
   $scope.currentQuestion = 0;
@@ -19,7 +21,7 @@ angular.module('questions', ['questionsSrv'])
 
   $scope.check = function(){
 
-      var selected = document.getElementById("radio" + $scope.choice).childNodes[0];
+      var selected = document.getElementById("radio" + $scope.currentCategory + $scope.choice).childNodes[0];
       $scope.turn = true;
 
       if($scope.choice != $scope.question.correct_answer){
@@ -40,7 +42,7 @@ angular.module('questions', ['questionsSrv'])
       });
 
     $timeout(function () {
-      var selected = document.getElementById("radio" + $scope.choice).childNodes[0];
+      var selected = document.getElementById("radio" + $scope.currentCategory + $scope.choice).childNodes[0];
       $scope.currentQuestion++;
       $scope.turn = false;
       $scope.choice = "";
@@ -51,7 +53,7 @@ angular.module('questions', ['questionsSrv'])
         clearQuestion(selected, null);
       }
 
-      if($scope.category.count > $scope.currentQuestion){
+      if(questions.length > $scope.currentQuestion){
         $scope.question = questions[$scope.currentQuestion];
         console.log("Next question time!");
       }else{
@@ -74,6 +76,7 @@ angular.module('questions', ['questionsSrv'])
   function renderCorrect(correct){
     correct.parentElement.style.borderColor = "#33CD5F";
     correct.parentElement.childNodes[1].childNodes[0].style.backgroundColor = "#33CD5F";
+    console.log("fuck");
   }
 
   function renderWrong(correct, wrong){
@@ -85,6 +88,7 @@ angular.module('questions', ['questionsSrv'])
     wrong.parentElement.style.borderColor = "#EF473A";
     wrong.parentElement.childNodes[1].childNodes[0].style.backgroundColor = "#EF473A";
     wrong.parentElement.childNodes[1].childNodes[1].className = "radio-icon disable-pointer-events icon ion-close";
+    console.log("fuck this too");
   }
 
   function clearQuestion(correct, wrong){

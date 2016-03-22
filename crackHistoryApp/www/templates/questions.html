@@ -7,7 +7,7 @@
     </div>
     <ion-list>
       <ion-radio ng-repeat="answer in question.answers track by $index" ng-model="$parent.$parent.choice"
-                 ng-value="answer.index" id="{{'radio' + answer.index}}" ng-disabled="turn">
+                 ng-value="answer.index" id="{{'radio' + currentCategory + answer.index}}" ng-disabled="turn">
         {{answer.body}}
       </ion-radio>
     </ion-list>
