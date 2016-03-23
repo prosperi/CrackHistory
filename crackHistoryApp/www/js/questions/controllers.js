@@ -1,8 +1,16 @@
 angular.module('questions', ['questionsSrv'])
 
-.controller('categoriesCtrl', ['$scope', 'categoriesSrv', '$localStorage', function($scope, categoriesSrv, $localStorage){
+.controller('categoriesCtrl', ['$scope', '$localStorage', 'categoriesSrv', '$ionicLoading', '$timeout', function($scope, $localStorage, categoriesSrv, $ionicLoading, $timeout){
 
-  $scope.categories = $localStorage.categoryList;
+  $ionicLoading.show({
+      template: '<ion-spinner icon="ripple" class="spinner-positive" ></ion-spinner>',
+      animation: 'fade-in'
+  });
+
+  $timeout(function () {
+    $scope.categories = $localStorage.categoryList;
+    $ionicLoading.hide();
+  }, 2000);
 
 }])
 
