@@ -13,8 +13,16 @@ angular.module('questionsSrv', ['ngStorage'])
       for(key in response.data){
         categories.categoryList.unshift(response.data[key]);
       }
-      //window.localStorage.setItem("categoryList", JSON.stringify(categories.categoryList));
       $localStorage.categoryList = categories.categoryList;
+
+      for(var i=0; i<$localStorage.categoryList.length; i++){
+        $localStorage.activity.push({
+          subject_id: $localStorage.categoryList[i].subject_id,
+          category_id: i,
+          questions: []
+        });
+      }
+      
     }, function(response){
       console.log("Fetching categories failed");
     });

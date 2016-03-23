@@ -1,4 +1,4 @@
-angular.module('questions', ['questionsSrv'])
+angular.module('questions', ['questionsSrv', 'questionsFltr'])
 
 .controller('categoriesCtrl', ['$scope', '$localStorage', 'categoriesSrv', '$ionicLoading', '$timeout', function($scope, $localStorage, categoriesSrv, $ionicLoading, $timeout){
 
@@ -14,7 +14,7 @@ angular.module('questions', ['questionsSrv'])
 
 }])
 
-.controller('questionsCtrl', ['$scope', '$stateParams', '$ionicLoading', '$timeout', '$state', '$ionicPopup', '$localStorage', function($scope, $stateParams, $ionicLoading, $timeout, $state, $ionicPopup, $localStorage){
+.controller('questionsCtrl', ['$scope', '$stateParams', '$ionicLoading', '$timeout', '$state', '$ionicPopup', '$localStorage', '$interval', function($scope, $stateParams, $ionicLoading, $timeout, $state, $ionicPopup, $localStorage, $interval){
   console.log("hi");
   $scope.category = $localStorage.categoryList[$stateParams.id];
   var questions = $localStorage.questionList.filter(function(value){
@@ -26,6 +26,13 @@ angular.module('questions', ['questionsSrv'])
   $scope.question = questions[$scope.currentQuestion];
   $scope.choice = "";
   $scope.turn = false;
+  $scope.answers = [0, 0];
+  $scope.time = 0;
+
+
+  var timer = $interval(function(){
+    $scope.time++;
+  }, 1000);
 
   $scope.check = function(){
 
@@ -34,9 +41,12 @@ angular.module('questions', ['questionsSrv'])
 
       if($scope.choice != $scope.question.correct_answer){
         renderWrong($scope.question.correct_answer*2, selected);
+        $scope.answers[1]++;
         console.log("You are mistaken my dear!");
       }else{
         renderCorrect(selected);
+        $scope.answers[0]++;
+        $localStorage.activity[$scope.currentCategory].questions.push($scope.currentQuestion);
         console.log("Good job man, I'm proud of you!");
       }
 
@@ -65,6 +75,7 @@ angular.module('questions', ['questionsSrv'])
         $scope.question = questions[$scope.currentQuestion];
         console.log("Next question time!");
       }else{
+        $interval.cancel(timer);
         $state.go('app.dashboard');
       }
 
@@ -80,6 +91,7 @@ angular.module('questions', ['questionsSrv'])
       okText: "დახურვა"
     });
   };
+
 
   function renderCorrect(correct){
     correct.parentElement.style.borderColor = "#33CD5F";

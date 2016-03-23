@@ -1,6 +1,13 @@
 angular.module('dashboard', [])
 
-.controller('dashboardCtrl', [ '$scope', '$timeout', function($scope, $timeout){
+.controller('dashboardCtrl', [ '$scope', '$timeout', '$localStorage', function($scope, $timeout, $localStorage){
+
+  if($localStorage.activity != undefined){
+    console.log("you've worked, good!", $localStorage);
+  }else{
+    $localStorage.activity = [];
+    console.log("there is no activity, try harder!");
+  }
 
   $scope.data = [];
   $scope.results = [];
