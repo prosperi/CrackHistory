@@ -1,0 +1,48 @@
+{
+  "name": "bpg-mrgvlovani",
+  "description": "BPG Mrgvlovani Web-Font Package",
+  "version": "1.0.0",
+  "keywords": [
+    "ttf",
+    "woff",
+    "woff2",
+    "svg",
+    "font",
+    "web-font",
+    "bpg-mrgvlovani"
+  ],
+  "main": [
+    "css/bpg-mrgvlovani.css"
+  ],
+  "homepage": "https://github.com/web-fonts/bpg-mrgvlovani",
+  "authors": [
+    "Lado Lomidze <lado.lomidze@gmail.com>"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/web-fonts/bpg-mrgvlovani.git"
+  },
+  "license": [
+    "MIT",
+    "CC-BY-NC-ND-4.0"
+  ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests",
+    "*.md",
+    "font.json"
+  ],
+  "_release": "1.0.0",
+  "_resolution": {
+    "type": "version",
+    "tag": "1.0.0",
+    "commit": "33642f630079262dc21bf243569ea094c344f618"
+  },
+  "_source": "git://github.com/web-fonts/bpg-mrgvlovani.git",
+  "_target": "~1.0.0",
+  "_originalSource": "bpg-mrgvlovani",
+  "_direct": true
+}

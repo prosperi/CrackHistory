@@ -5,6 +5,8 @@
     "ionic": "driftyco/ionic-bower#1.2.4"
   },
   "dependencies": {
-    "Chart.js": "~1.0.2"
+    "Chart.js": "~1.0.2",
+    "bpg-mrgvlovani-caps": "~1.0.0",
+    "bpg-mrgvlovani": "~1.0.0"
   }
 }

@@ -3006,7 +3006,8 @@ time, mark, audio, video {
   border: 0;
   vertical-align: baseline;
   font: inherit;
-  font-size: 100%; }
+  font-size: 100%;
+  }
 
 ol, ul {
   list-style: none; }
@@ -3336,12 +3337,13 @@ body,
   word-wrap: break-word;
   font-size: 14px;
   font-family: -apple-system;
-  font-family: "-apple-system", "Helvetica Neue", "Roboto", "Segoe UI", sans-serif;
+  font-family: "BPG Mrgvlovani Caps", sans-serif;
   line-height: 20px;
   text-rendering: optimizeLegibility;
   -webkit-backface-visibility: hidden;
   -webkit-user-drag: none;
-  -ms-content-zooming: none; }
+  -ms-content-zooming: none;
+  }
 
 body.grade-b,
 body.grade-c {
@@ -3594,8 +3596,8 @@ h1, h2, h3, h4, h5, h6,
 .h1, .h2, .h3, .h4, .h5, .h6 {
   /* color: #000; */
   font-weight: 500;
-  font-family: "-apple-system", "Helvetica Neue", "Roboto", "Segoe UI", sans-serif;
   line-height: 1.2;
+  font-family: "BPG Mrgvlovani Caps", sans-serif;
   }
   h1 small, h2 small, h3 small, h4 small, h5 small, h6 small,
   .h1 small, .h2 small, .h3 small, .h4 small, .h5 small, .h6 small {
@@ -5258,7 +5260,9 @@ ion-tabs.tabs-color-active-dark .tab-item {
   box-shadow: none; }
 
 .menu-left {
-  left: 0; }
+  left: 0;
+  font-family: "BPG Mrgvlovani Caps",sans-serif;
+  }
 
 .menu-right {
   right: 0; }

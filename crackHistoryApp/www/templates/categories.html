@@ -1,7 +1,7 @@
 <ion-view view-title="კითხვები" class="bar-positive">
   <ion-content scroll="true">
     <ul class="list">
-      <li class="item item-icon-right" ng-repeat="category in categories track by $index"
+      <li class="item item-icon-right" ng-repeat="category in categoryList track by $index"
           style="font-size:11pt; padding-right:73px;" ui-sref="app.category({ id: $index })">
         {{category.name}}
         <span class="badge badge-positive" style="margin-right:11px;">{{category.count}}</span>

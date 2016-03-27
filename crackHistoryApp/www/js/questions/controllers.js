@@ -2,37 +2,68 @@ angular.module('questions', ['questionsSrv', 'questionsFltr'])
 
 .controller('categoriesCtrl', ['$scope', '$localStorage', 'categoriesSrv', '$ionicLoading', '$timeout', function($scope, $localStorage, categoriesSrv, $ionicLoading, $timeout){
 
-  $ionicLoading.show({
-      template: '<ion-spinner icon="ripple" class="spinner-positive" ></ion-spinner>',
-      animation: 'fade-in'
-  });
+  if(categoriesSrv == true){
+    $scope.categoryList = $localStorage.categoryList;
+    console.log("Category list already exists", $scope.categoryList);
+  }else{
+    categoriesSrv.showLoader();
+    categoriesSrv.getData().then(function(response){
+      $scope.categoryList = [];
+      for(key in response.data){
+        $scope.categoryList.unshift(response.data[key]);
+      }
+      $localStorage.categoryList = $scope.categoryList;
+      if($localStorage.activity == undefined) $localStorage.activity = [];
 
-  $timeout(function () {
-    $scope.categories = $localStorage.categoryList;
-    $ionicLoading.hide();
-  }, 2000);
+      for(var i=0; i<$localStorage.categoryList.length; i++){
+        $localStorage.activity.push({
+          subject_id: $localStorage.categoryList[i].subject_id,
+          category_id: i,
+          questions: []
+        });
+      }
+
+      $ionicLoading.hide();
+    }, function(response){
+      console.log("Fetching categories failed");
+    });
+  }
 
 }])
 
-.controller('questionsCtrl', ['$scope', '$stateParams', '$ionicLoading', '$timeout', '$state', '$ionicPopup', '$localStorage', '$interval', function($scope, $stateParams, $ionicLoading, $timeout, $state, $ionicPopup, $localStorage, $interval){
-  console.log("hi");
+.controller('questionsCtrl', ['$scope', '$stateParams', '$ionicLoading', '$timeout', '$state', '$ionicPopup', '$localStorage', '$interval', 'questionsByCatSrv',  function($scope, $stateParams, $ionicLoading, $timeout, $state, $ionicPopup, $localStorage, $interval, questionsByCatSrv){
+
+  var timer;
   $scope.category = $localStorage.categoryList[$stateParams.id];
-  var questions = $localStorage.questionList.filter(function(value){
+  $scope.questions = [];
+
+  $scope.questions = $localStorage.questionList.filter(function(value){
     return value.category_id == (parseInt($stateParams.id) + 1);
   });
 
-  $scope.currentCategory = $stateParams.id;
-  $scope.currentQuestion = 0;
-  $scope.question = questions[$scope.currentQuestion];
-  $scope.choice = "";
-  $scope.turn = false;
-  $scope.answers = [0, 0];
-  $scope.time = 0;
+  if($scope.questions.length > 0){
+    initQuestions(timer);
+    console.log("Question list already exists", $scope.questions);
+  }else{
+
+    questionsByCatSrv.showLoader();
+    questionsByCatSrv.getData(parseInt($stateParams.id) + 1).then(function(response){
+
+      $localStorage.questionList = $localStorage.questionList.concat(response.data.questions);
+      $scope.questions = $localStorage.questionList.filter(function(value){
+        return value.category_id == (parseInt($stateParams.id) + 1);
+      });
+
+      initQuestions(timer);
+      $ionicLoading.hide();
+    }, function(response){
+      console.log("Fetching categories failed");
+    });
+
+  }
 
 
-  var timer = $interval(function(){
-    $scope.time++;
-  }, 1000);
+
 
   $scope.check = function(){
 
@@ -46,7 +77,7 @@ angular.module('questions', ['questionsSrv', 'questionsFltr'])
       }else{
         renderCorrect(selected);
         $scope.answers[0]++;
-        $localStorage.activity[$scope.currentCategory].questions.push($scope.currentQuestion);
+        //$localStorage.activity[$scope.currentCategory].questions.push($scope.currentQuestion);
         console.log("Good job man, I'm proud of you!");
       }
 
@@ -71,8 +102,8 @@ angular.module('questions', ['questionsSrv', 'questionsFltr'])
         clearQuestion(selected, null);
       }
 
-      if(questions.length > $scope.currentQuestion){
-        $scope.question = questions[$scope.currentQuestion];
+      if($scope.questions.length > $scope.currentQuestion){
+        $scope.question = $scope.questions[$scope.currentQuestion];
         console.log("Next question time!");
       }else{
         $interval.cancel(timer);
@@ -91,6 +122,20 @@ angular.module('questions', ['questionsSrv', 'questionsFltr'])
       okText: "დახურვა"
     });
   };
+
+  function initQuestions(timer){
+      $scope.currentCategory = $stateParams.id;
+      $scope.currentQuestion = 0;
+      $scope.question = $scope.questions[$scope.currentQuestion];
+      $scope.choice = "";
+      $scope.turn = false;
+      $scope.answers = [0, 0];
+      $scope.time = 0;
+
+      timer = $interval(function(){
+        $scope.time++;
+      }, 1000);
+  }
 
 
   function renderCorrect(correct){
