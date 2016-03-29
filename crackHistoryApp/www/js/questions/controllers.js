@@ -2,7 +2,23 @@ angular.module('questions', ['questionsSrv', 'questionsFltr'])
 
 .controller('categoriesCtrl', ['$scope', '$localStorage', 'categoriesSrv', '$ionicLoading', '$timeout', function($scope, $localStorage, categoriesSrv, $ionicLoading, $timeout){
 
-  if(categoriesSrv == true){
+  if("checkData" in categoriesSrv){
+    categoriesSrv.checkData().then(function(response){
+      var newList = [];
+      for(var key in response.data){
+        newList.unshift(response.data[key]);
+      }
+      for(var i=0; i<newList.length; i++){
+        console.log(newList[i].count, $localStorage.categoryList[i].count);
+        if(newList[i].count != $localStorage.categoryList[i].count){
+          console.log("New List");
+          $localStorage.categoryList = newList;
+          break;
+        }
+      }
+    }, function(response){
+      console.log("Data Update failed");
+    });
     $scope.categoryList = $localStorage.categoryList;
     console.log("Category list already exists", $scope.categoryList);
   }else{
@@ -41,9 +57,15 @@ angular.module('questions', ['questionsSrv', 'questionsFltr'])
     return value.category_id == (parseInt($stateParams.id) + 1);
   });
 
-  if($scope.questions.length > 0){
-    initQuestions(timer);
-    console.log("Question list already exists", $scope.questions);
+  if("checkData" in questionsByCatSrv){
+    questionsByCatSrv.checkData(parseInt($stateParams.id));
+    if(!questionsByCatSrv.checkData(parseInt($stateParams.id))){
+      initQuestions(timer);
+      console.log("Question list already exists", $scope.questions);
+    }else{
+      
+    }
+
   }else{
 
     questionsByCatSrv.showLoader();
