@@ -59,14 +59,18 @@ angular.module('questionsSrv', ['ngStorage'])
       var filteredList = questionList.filter(function(value){
         return value.category_id == id + 1;
       });
-      if(filteredList.length != categoryList[id].count){
+      if(filteredList.length < categoryList[id].count){
         var address = "https://notgiorgi.com/api/category/" + (id + 1) + "/questions";
-        return $http({
-            method: "GET",
-            url: address
-          }).then(function(response){        ////// Needs correction
-            
-          });
+        var update = {};
+        update.process = function(){
+          return $http({
+              method: "GET",
+              url: address
+            });
+        };
+
+        return update;
+
       }else{
         return false;
       }

@@ -58,12 +58,28 @@ angular.module('questions', ['questionsSrv', 'questionsFltr'])
   });
 
   if("checkData" in questionsByCatSrv){
-    questionsByCatSrv.checkData(parseInt($stateParams.id));
     if(!questionsByCatSrv.checkData(parseInt($stateParams.id))){
       initQuestions(timer);
       console.log("Question list already exists", $scope.questions);
     }else{
-      
+      questionsByCatSrv.checkData(parseInt($stateParams.id)).process().then(function(response){
+        console.log("fuck", response.data.questions);
+        for(var i=0; i<$localStorage.questionList.length; i++){
+          for(var j=0; j<response.data.questions.length; j++){
+            console.log($localStorage.questionList[i], response.data.questions[j]);
+            if($localStorage.questionList[i].id == response.data.questions[j].id)
+              response.data.questions.splice(j, 1);
+          }
+        }
+
+        $localStorage.questionList = $localStorage.questionList.concat(response.data.questions);
+
+        $scope.questions = $localStorage.questionList.filter(function(value){
+          return value.category_id == (parseInt($stateParams.id) + 1);
+        });
+        initQuestions(timer);
+        console.log("Updated question list", $scope.questions);
+      });
     }
 
   }else{
