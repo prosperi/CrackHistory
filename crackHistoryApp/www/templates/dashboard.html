@@ -1,24 +1,30 @@
 <ion-view view-title="შეჯამება" class="bar-positive">
   <ion-content scroll="" padding="1">
 
-    <h4>ბოლო აქტივობა</h4>
-    <canvas id="myChart"></canvas>
-    <div id="js-legend" class="chart-legend"></div>
-
-    <h4>დეტალურად</h4>
-    <div class="row" ng-repeat="couple in repeatTimes track by $index" >
-      <div class="col col-50">
-        <h5>{{data[$index*2].label}}</h5>
-        <canvas id="result-{{$index*2}}"></canvas>
-        <div id="legend-{{$index*2}}" class="chart-legend"></div>
-      </div>
-      <div class="col col-50" ng-if="!$last">
-        <h5>{{data[$index*2+1].label}}</h5>
-        <canvas id="result-{{$index*2 + 1}}"></canvas>
-        <div id="legend-{{$index*2 + 1}}" class="chart-legend"></div>
-      </div>
+    <div ng-if="activity.length==0" class="dashWarn">
+      <h4>ჯერ კიდევ არ დაგიწყია ვარჯიში?<br/>რაღას ელოდები</h4>
+      <button ui-sref="app.categories" class="button"><h5 style="color:#FFF;">დაიწყე ახლავე<h5></button>
     </div>
 
+    <div ng-if="activity.length>0">
+      <h4>ბოლო აქტივობა</h4>
+      <canvas id="myChart"></canvas>
+      <div id="js-legend" class="chart-legend"></div>
+
+      <h4>დეტალურად</h4>
+      <div class="row" ng-repeat="couple in repeatTimes track by $index" >
+        <div class="col col-50">
+          <h5>{{data[$index*2].label}}</h5>
+          <canvas id="result-{{$index*2}}"></canvas>
+          <div id="legend-{{$index*2}}" class="chart-legend"></div>
+        </div>
+        <div class="col col-50" ng-if="!$last">
+          <h5>{{data[$index*2+1].label}}</h5>
+          <canvas id="result-{{$index*2 + 1}}"></canvas>
+          <div id="legend-{{$index*2 + 1}}" class="chart-legend"></div>
+        </div>
+      </div>
+    </div>
 
   </ion-content>
 </ion-view>

@@ -29,7 +29,7 @@ angular.module('questions', ['questionsSrv', 'questionsFltr'])
         $scope.categoryList.unshift(response.data[key]);
       }
       $localStorage.categoryList = $scope.categoryList;
-      if($localStorage.activity == undefined) $localStorage.activity = [];
+      /*if($localStorage.activity == undefined) $localStorage.activity = [];
 
       for(var i=0; i<$localStorage.categoryList.length; i++){
         $localStorage.activity.push({
@@ -37,7 +37,7 @@ angular.module('questions', ['questionsSrv', 'questionsFltr'])
           category_id: i,
           questions: []
         });
-      }
+      }*/
 
       $ionicLoading.hide();
     }, function(response){

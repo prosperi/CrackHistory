@@ -3005,7 +3005,7 @@ time, mark, audio, video {
   padding: 0;
   border: 0;
   vertical-align: baseline;
-  font: inherit;
+  /* font: inherit; */
   font-size: 100%;
   }
 
@@ -3594,7 +3594,7 @@ cite {
 
 h1, h2, h3, h4, h5, h6,
 .h1, .h2, .h3, .h4, .h5, .h6 {
-  /* color: #000; */
+  color: #444;
   font-weight: 500;
   line-height: 1.2;
   font-family: "BPG Mrgvlovani Caps", sans-serif;
